@@ -1,3 +1,9 @@
+interface TelegramApiResponse {
+    ok: boolean;
+    error_code?: number;
+    description?: string;
+}
+
 export class TelegramClient {
 
     constructor(
@@ -27,8 +33,17 @@ export class TelegramClient {
             }
         );
 
+        const data: unknown = await response.json();
+
         if (!response.ok) {
-            throw new Error(`Telegram API returned ${response.status}`);
+            const error = data as TelegramApiResponse;
+            console.error("Telegram API error:", error);
+
+            throw new Error(
+                `Telegram API returned ${response.status}: ${
+                    error.description ?? "Unknown error"
+                }`
+            );
         }
 
     }

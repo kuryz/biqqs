@@ -20,8 +20,11 @@ class TelegramClient {
                 text
             })
         });
+        const data = await response.json();
         if (!response.ok) {
-            throw new Error(`Telegram API returned ${response.status}`);
+            const error = data;
+            console.error("Telegram API error:", error);
+            throw new Error(`Telegram API returned ${response.status}: ${error.description ?? "Unknown error"}`);
         }
     }
 }
