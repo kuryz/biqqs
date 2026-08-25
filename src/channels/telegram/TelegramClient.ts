@@ -28,9 +28,7 @@ export class TelegramClient {
         );
 
         if (!response.ok) {
-            throw new Error(
-                `Telegram API returned ${response.status}`
-            );
+            throw new Error(`Telegram API returned ${response.status}`);
         }
 
     }

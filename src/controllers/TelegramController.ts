@@ -58,7 +58,6 @@ export class TelegramController {
         } catch (error) {
 
             console.error(error);
-
             await this.telegram.sendMessage(
                 chatId,
                 "An unexpected error occurred. Please try again."
